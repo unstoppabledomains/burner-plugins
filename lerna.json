@@ -2,7 +2,8 @@
   "packages": [
     "basic-wallet",
     "local-wallet",
-    "my-plugin"
+    "dot-crypto-plugin",
+    "unstoppable-plugin"
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,

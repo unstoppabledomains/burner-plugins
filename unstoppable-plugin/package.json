@@ -1,9 +1,9 @@
 {
-  "name": "my-plugin",
+  "name": "unstoppable-plugin",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "dist/MyPlugin.js",
-  "types": "dist/MyPlugin.d.ts",
+  "main": "dist/UnstoppablePlugin.js",
+  "types": "dist/UnstoppablePlugin.d.ts",
   "scripts": {
     "build": "tsc",
     "start-basic": "tsc -w",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@burner-wallet/assets": "^1.0.0",
     "@burner-wallet/types": "^1.0.0",
+    "@unstoppabledomains/resolution": "^1.0.24",
     "@types/react": "*"
   },
   "devDependencies": {

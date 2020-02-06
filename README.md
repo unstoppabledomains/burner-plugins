@@ -1,6 +1,6 @@
-# Sample Burner Wallet 2 Plugin
+# Unstoppable Domains Plugins for Burner Wallet
 
-This repo provides a boilerplate for building a new plugin for the Burner Wallet 2.
+This repo is forked from the boilerplate for building a new plugin for the Burner Wallet 2.
 
 ## Setup
 
@@ -12,17 +12,10 @@ This repo provides a boilerplate for building a new plugin for the Burner Wallet
 4. Run `yarn start-local` to start the wallet while connected to Ganache, or run `yarn start-basic`
   to start the wallet connected to Mainnet & xDai
 
-## Renaming the plugin
+## Unstoppable Plugin
+1. CNS (.crypto) and ENS (.eth) resolution using @unstoppabledomains/resolution library
+2. Domains resolve when entered in the address field on send page
 
-To rename the plugin from "MyPlugin" to your own plugin name, you must update the following locations:
-
-1. Rename the `my-plugin` directory
-2. Change `my-plugin` in `lerna.json` and the root `package.json`
-3. Change the name field in `package.json` in your plugin's `package.json` file
-4. Rename `MyPlugin.ts`
-5. Change `MyPlugin.js` and `MyPlugin.d.ts` in the plugin `package.json` file
-6. Change the class name in the main plugin file
-7. Change rename `my-plugin` dependency in `basic-wallet/package.json` & `local-wallet/package.json`
-8. In `basic-wallet/src/index.tsx` and `local-wallet/src/index.tsx`, update the import
-  `import MyPlugin from 'my-plugin';` as well as the `new MyPlugin()` constructor.
-9. Finally, run `yarn install` in the root to re-link the packages
+## Dot Crypto Plugin
+1. Page plugin for viewing and transferring .crypto domains
+2. Domain images displayed fetched from https://metadata.unstoppabledomains.com/

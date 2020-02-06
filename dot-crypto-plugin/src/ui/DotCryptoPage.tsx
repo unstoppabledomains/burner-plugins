@@ -63,8 +63,7 @@ const DotCryptoPage: React.FC<PluginPageContext> = ({
       <div
         style={{
           display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between"
+          flexWrap: "wrap"
         }}
       >
         {domains.map(domain => {

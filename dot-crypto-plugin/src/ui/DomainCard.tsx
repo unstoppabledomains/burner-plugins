@@ -28,7 +28,7 @@ const DomainCard = ({ domain, web3 }: Props) => {
       });
   }, []);
 
-  const handleTransfer = () => {
+  const handleTransfer = async () => {
     const recipientAddress = window.prompt("Enter recipient address", "");
     if (!recipientAddress) {
       return;
@@ -39,57 +39,64 @@ const DomainCard = ({ domain, web3 }: Props) => {
       { from: web3.givenProvider.selectedAddress }
     );
 
-    dotCryptoRegistry.methods
-      .transferFrom(
-        web3.givenProvider.selectedAddress,
-        recipientAddress,
-        getTokenId(domain)
-      )
-      .send()
-      .then(() => setTransferring(true));
+    try {
+      await dotCryptoRegistry.methods
+        .transferFrom(
+          web3.givenProvider.selectedAddress,
+          recipientAddress,
+          getTokenId(domain)
+        )
+        .send({ gasPrice: "8000000000" }, () => {
+          setTransferring(true);
+        });
+    } catch (e) {}
   };
 
-  const handleImgClick = () => {};
+  const handleImgClick = () => {
+    window.open(
+      `https://opensea.io/assets/${DotCryptoRegistryAddress}/${BigInt(
+        getTokenId(domain)
+      ).toString(10)}`,
+      "_blank"
+    );
+  };
 
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
-        marginTop: "1em",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        width: "200px",
+        padding: "1em"
       }}
     >
       <div
         style={{
-          height: "200px",
           marginBottom: "1em",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
+          border: "1px solid black",
+          borderRadius: "3px",
+          width: "100%",
+          height: "167px"
+          // minHeight: "167px"
         }}
       >
         {loading || transferring ? (
           transferring ? (
-            "Transferring.."
+            "Transferring..."
           ) : (
             "Loading..."
           )
         ) : (
-          <a
-            href={`https://opensea.io/assets/${DotCryptoRegistryAddress}/${BigInt(
-              getTokenId(domain)
-            ).toString(10)}`}
-            target="_blank"
-            style={{ height: "100%" }}
-          >
-            <img
-              style={{ height: "100%" }}
-              onClick={handleImgClick}
-              src={`data:image/svg+xml;base64,${image}`}
-            />
-          </a>
+          <img
+            style={{ width: "100%", height: "100%" }}
+            onClick={handleImgClick}
+            src={`data:image/svg+xml;base64,${image}`}
+          />
         )}
       </div>
       <div style={{ textAlign: "center" }}>{domain}</div>

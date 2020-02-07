@@ -5,6 +5,7 @@ Domain images displayed fetched from https://metadata.unstoppabledomains.com/
 
 ## Use
 Add to list of plugins for your Burner Wallet 
+
 plugins={[
   new UnstoppableDomainsPlugin()
 ]}

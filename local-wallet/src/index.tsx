@@ -5,7 +5,8 @@ import BurnerCore from "@burner-wallet/core";
 import { InjectedSigner, LocalSigner } from "@burner-wallet/core/signers";
 import { HTTPGateway } from "@burner-wallet/core/gateways";
 import ModernUI from "@burner-wallet/modern-ui";
-import DotCryptoPlugin from "dot-crypto-plugin";
+import UnstoppableDomainsPlugin from "@unstoppabledomains/burner-plugin-domains";
+import UnstoppableResolutionPlugin from "@unstoppabledomains/burner-plugin-resolution";
 
 const core = new BurnerCore({
   signers: [
@@ -33,7 +34,10 @@ const BurnerWallet = () => (
   <ModernUI
     title="Local Wallet"
     core={core}
-    plugins={[new DotCryptoPlugin()]}
+    plugins={[
+      new UnstoppableDomainsPlugin(),
+      new UnstoppableResolutionPlugin("461b1ad7096c4dbbaf4dc81944ecb4d1")
+    ]}
   />
 );
 

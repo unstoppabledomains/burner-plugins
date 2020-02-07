@@ -1,5 +1,5 @@
 {
-  "name": "dot-crypto-plugin",
+  "name": "@unstoppabledomains/burner-plugin-domains",
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/DotCryptoPlugin.js",

@@ -10,8 +10,8 @@ import {
 } from "@burner-wallet/core/gateways";
 import Exchange, { Uniswap, XDaiBridge } from "@burner-wallet/exchange";
 import ModernUI from "@burner-wallet/modern-ui";
-import DotCryptoPlugin from "dot-crypto-plugin";
-import UnstoppablePlugin from "unstoppable-plugin";
+import UnstoppableDomainsPlugin from "@unstoppabledomains/burner-plugin-domains";
+import UnstoppableResolutionPlugin from "@unstoppabledomains/burner-plugin-resolution";
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner()],
@@ -29,8 +29,8 @@ const BurnerWallet = () => (
     core={core}
     plugins={[
       exchange,
-      new DotCryptoPlugin(),
-      new UnstoppablePlugin("461b1ad7096c4dbbaf4dc81944ecb4d1")
+      new UnstoppableDomainsPlugin(),
+      new UnstoppableResolutionPlugin("461b1ad7096c4dbbaf4dc81944ecb4d1")
     ]}
   />
 );

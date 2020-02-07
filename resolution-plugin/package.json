@@ -1,5 +1,5 @@
 {
-  "name": "unstoppable-plugin",
+  "name": "@unstoppabledomains/burner-plugin-resolution",
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/UnstoppablePlugin.js",

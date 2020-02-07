@@ -1,6 +1,6 @@
 {
-  "name": "sample-burner-wallet-plugin",
-  "description": "Sample repo for building a Burner Wallet 2 plugin",
+  "name": "@unstoppabledomains/burner-plugins",
+  "description": "Repo for unstoppable domains burner plugins",
   "author": "David Mihal <david@dmihal.com>",
   "license": "MIT",
   "private": true,
@@ -14,8 +14,8 @@
   "workspaces": [
     "basic-wallet",
     "local-wallet",
-    "dot-crypto-plugin",
-    "unstoppable-plugin"
+    "domains-plugin",
+    "resolution-plugin"
   ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.5.0",

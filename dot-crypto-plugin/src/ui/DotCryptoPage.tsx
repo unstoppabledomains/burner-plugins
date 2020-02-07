@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { PluginPageContext, Asset } from "@burner-wallet/types";
 import DomainCard from "./DomainCard";
+import DotCryptoPlugin from "../DotCryptoPlugin";
 
 const UD_BASE_API_URL = "https://unstoppabledomains.com";
-
-const getMainnetWeb3 = (assets: Asset[]) => {
-  for (const asset of assets) {
-    if (asset.id === "eth" && asset.network === "1") {
-      const web3 = asset.getWeb3();
-      return web3;
-    }
-  }
-  return null;
-};
 
 const DotCryptoPage: React.FC<PluginPageContext> = ({
   BurnerComponents,
   defaultAccount,
-  assets
+  plugin
 }) => {
   const { Page } = BurnerComponents;
   const [loading, setLoading] = useState(true);
@@ -27,7 +18,11 @@ const DotCryptoPage: React.FC<PluginPageContext> = ({
   const [web3, setWeb3] = useState(null as any);
 
   useEffect(() => {
-    const _web3 = getMainnetWeb3(assets);
+    const _web3 = (plugin as DotCryptoPlugin).getWeb3Network("1");
+    if (!_web3) {
+      setLoading(false);
+      return;
+    }
     setWeb3(_web3);
     fetch(
       `${UD_BASE_API_URL}/api/zns-domains/${_web3.givenProvider.selectedAddress}`
@@ -58,6 +53,18 @@ const DotCryptoPage: React.FC<PluginPageContext> = ({
           }}
         >
           Loading...
+        </div>
+      )}
+      {!loading && !web3 && (
+        <div
+          style={{
+            height: "20em",
+            justifyContent: "center",
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          Please connect to the mainnet to view/transfer your .crypto domains
         </div>
       )}
       <div

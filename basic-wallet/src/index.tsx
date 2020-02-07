@@ -15,11 +15,7 @@ import UnstoppablePlugin from "unstoppable-plugin";
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner()],
-  gateways: [
-    new InjectedGateway(),
-    new InfuraGateway("461b1ad7096c4dbbaf4dc81944ecb4d1"),
-    new XDaiGateway()
-  ],
+  gateways: [new InjectedGateway(), new InfuraGateway(), new XDaiGateway()],
   assets: [xdai, dai, eth]
 });
 
@@ -31,7 +27,11 @@ const BurnerWallet = () => (
   <ModernUI
     title="Basic Wallet"
     core={core}
-    plugins={[exchange, new DotCryptoPlugin(), new UnstoppablePlugin()]}
+    plugins={[
+      exchange,
+      new DotCryptoPlugin(),
+      new UnstoppablePlugin("461b1ad7096c4dbbaf4dc81944ecb4d1")
+    ]}
   />
 );
 

@@ -28,16 +28,15 @@ const DotCryptoPage: React.FC<PluginPageContext> = ({
       `${UD_BASE_API_URL}/api/zns-domains/${_web3.givenProvider.selectedAddress}`
     )
       .then(resp => resp.json())
-      .then(({ domains }) => {
-        const _domains = [];
-        for (const domain of domains) {
-          if (domain.extension === "crypto") {
-            _domains.push(domain);
-          }
+      .then(
+        ({ domains }: { domains: { label: string; extension: string }[] }) => {
+          const _domains = domains.filter(
+            domain => domain.extension === "crypto"
+          );
+          setLoading(false);
+          setDomains(_domains);
         }
-        setLoading(false);
-        setDomains(_domains);
-      });
+      );
   }, [defaultAccount]);
 
   return (

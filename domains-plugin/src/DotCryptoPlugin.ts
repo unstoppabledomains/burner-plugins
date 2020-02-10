@@ -20,7 +20,8 @@ export default class DotCryptoPlugin implements Plugin {
           web3 &&
           web3.givenProvider &&
           web3.givenProvider.networkVersion === network &&
-          web3.currentProvider.network === network
+          web3.currentProvider &&
+          (web3.currentProvider as any).network === network
         ) {
           return web3;
         }

@@ -14,18 +14,7 @@ export default class DotCryptoPlugin implements Plugin {
 
   getWeb3Network = (network: string) => {
     if (this.pluginContext) {
-      try {
-        const web3 = this.pluginContext.getWeb3(network);
-        if (
-          web3 &&
-          web3.givenProvider &&
-          web3.givenProvider.networkVersion === network &&
-          web3.currentProvider &&
-          (web3.currentProvider as any).network === network
-        ) {
-          return web3;
-        }
-      } catch (e) {}
+      return this.pluginContext!.getWeb3(network);
     }
     return null;
   };

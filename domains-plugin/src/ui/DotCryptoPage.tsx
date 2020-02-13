@@ -72,7 +72,14 @@ const DotCryptoPage: React.FC<PluginPageContext> = ({
       >
         {domains.map(domain => {
           const name = domain.label + "." + domain.extension;
-          return <DomainCard key={name} domain={name} web3={web3} />;
+          return (
+            <DomainCard
+              key={name}
+              domain={name}
+              web3={web3}
+              defaultAccount={defaultAccount}
+            />
+          );
         })}
       </div>
     </Page>

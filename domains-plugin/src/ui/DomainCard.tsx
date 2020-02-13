@@ -6,6 +6,7 @@ const DotCryptoRegistryAddress = "0xd1e5b0ff1287aa9f9a268759062e4ab08b9dacbe";
 
 interface Props {
   domain: string;
+  defaultAccount: string;
   web3: any;
 }
 
@@ -14,7 +15,7 @@ const BASE_API_URL = "https://metadata.unstoppabledomains.com/image";
 const getTokenId = (domain: string) =>
   new UnstoppableResolution().namehash(domain);
 
-const DomainCard = ({ domain, web3 }: Props) => {
+const DomainCard = ({ domain, web3, defaultAccount }: Props) => {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
   const [transferring, setTransferring] = useState(false);
@@ -36,20 +37,18 @@ const DomainCard = ({ domain, web3 }: Props) => {
     const dotCryptoRegistry = new web3.eth.Contract(
       DotCryptoRegistryABI,
       DotCryptoRegistryAddress,
-      { from: web3.givenProvider.selectedAddress }
+      { from: defaultAccount }
     );
 
     try {
       await dotCryptoRegistry.methods
-        .transferFrom(
-          web3.givenProvider.selectedAddress,
-          recipientAddress,
-          getTokenId(domain)
-        )
+        .transferFrom(defaultAccount, recipientAddress, getTokenId(domain))
         .send({ gasPrice: "8000000000" }, () => {
           setTransferring(true);
         });
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleImgClick = () => {

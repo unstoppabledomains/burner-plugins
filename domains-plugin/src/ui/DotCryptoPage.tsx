@@ -24,9 +24,7 @@ const DotCryptoPage: React.FC<PluginPageContext> = ({
       return;
     }
     setWeb3(_web3);
-    fetch(
-      `${UD_BASE_API_URL}/api/zns-domains/${_web3.givenProvider.selectedAddress}`
-    )
+    fetch(`${UD_BASE_API_URL}/api/zns-domains/${defaultAccount}`)
       .then(resp => resp.json())
       .then(
         ({ domains }: { domains: { label: string; extension: string }[] }) => {
